@@ -1,0 +1,21 @@
+{
+  "code": "100000",
+  "data": {
+    "list|5": [
+      {
+        "topic_id": "@id",
+        "topic_title|3-7": "@cname",
+        "topic_pic|1": [
+          "/uploads/topic/20130426/8af6e6165dbba47be9a1f4374f9e0c92_50_50.png"
+        ],
+        "userIds": [
+          1,
+          2,
+          3
+        ],
+        "discuss_count|1-100": 100,
+        "focus_count|1-1000": 1000
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "code": "100000",
+  "data": {
+    "object": {
+      "topic_id": "@guid",
+      "topic_title|3-7": "@cname",
+      "date": "@date",
+      "datetime": "@datetime",
+      "now": "@now",
+      "time": "@time",
+      "userIds": [
+        1,
+        2,
+        3
+      ],
+      "discuss_count|1-100": 100,
+      "province": "@province",
+      "city": "@city",
+      "county": "@county",
+      "cparagraph": "@cparagraph",
+      "csentence": "@csentence",
+      "cword": "@cword",
+      "ctitle": "@ctitle",
+      "paragraph": "@paragraph",
+      "sentence": "@sentence",
+      "word": "@word",
+      "title": "@title"
+    },
+    "array|2": [
+      "BAIDU",
+      "ALIBABA",
+      "DOUYIN",
+      "JD"
+    ]
+  }
+}
