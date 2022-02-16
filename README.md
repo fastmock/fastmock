@@ -16,7 +16,7 @@ FastMock是一个基于[fastjson](https://github.com/alibaba/fastjson)开发java
 <dependency>
     <groupId>io.github.fastmock</groupId>
     <artifactId>fastmock</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 对于gradle用户，将以下内容添加到您的build.gradle配置文件中。
