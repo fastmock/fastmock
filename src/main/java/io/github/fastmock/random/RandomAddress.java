@@ -2,7 +2,7 @@ package io.github.fastmock.random;
 
 import io.github.fastmock.Area;
 import io.github.fastmock.RegionDict;
-import org.apache.commons.lang3.RandomUtils;
+import io.github.fastmock.utils.RandomUtils;
 
 import java.util.List;
 

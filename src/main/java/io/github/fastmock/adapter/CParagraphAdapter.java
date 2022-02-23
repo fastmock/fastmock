@@ -20,6 +20,6 @@ public class CParagraphAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
-        return RandomText.cparagraph(rules.getMin(), rules.getMax());
+        return RandomText.cparagraph(rules.getCount());
     }
 }

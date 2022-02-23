@@ -4,10 +4,6 @@ import io.github.fastmock.ParseResult;
 import io.github.fastmock.StringTypeAdapter;
 import io.github.fastmock.StringTypes;
 import io.github.fastmock.model.ImageProps;
-import io.github.fastmock.utils.StringUtils;
-import org.apache.commons.lang3.RandomUtils;
-
-import java.util.List;
 
 /**
  * 随机图片类型的数据

@@ -64,7 +64,10 @@ public class MockJSTemplateTest {
     @Test
     public void cword() {
         Mock mock = new Mock();
-        String cword = "{\"cword\": \"10000\"}";
+        String cword = "{\"cword\": \"@cword\"," +
+                "\"ctitle|5\": \"@title\"," +
+                "\"cparagraph|5\": \"@paragraph\"," +
+                "\"csentence|5\": \"@sentence\"}";
         JSONObject jsonObject = mock.mock(cword);
         log.info("cword {}", jsonObject.toString());
     }
@@ -72,7 +75,7 @@ public class MockJSTemplateTest {
     @Test
     public void array() {
         String template = "{\n" +
-                "  \"array|1\": [\n" +
+                "  \"array|4-4\": [\n" +
                 "    \"AMD\",\n" +
                 "    \"CMD\",\n" +
                 "    \"UMD\"\n" +
@@ -86,7 +89,7 @@ public class MockJSTemplateTest {
     @Test
     public void array2() {
         String template = "{\n" +
-                "  \"array|1\": [\n" +
+                "  \"array|2-2\": [\n" +
                 " {\"name\":\"@name\"}" +
                 "  ]\n" +
                 "}";

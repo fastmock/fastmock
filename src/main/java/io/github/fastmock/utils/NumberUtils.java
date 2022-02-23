@@ -11,7 +11,7 @@ public class NumberUtils {
      * 自定义整型数值转换
      *
      * @param s 输入的字符串
-     * @return 如果转换错误则返回 0
+     * @return 如果转换错误则返回 1
      */
     public static Integer parseInt(String s) {
         try {

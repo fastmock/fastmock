@@ -19,6 +19,6 @@ public class SentenceAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
-        return RandomText.sentence(rules.getMin(), rules.getMax());
+        return RandomText.sentence(rules.getCount());
     }
 }

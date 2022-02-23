@@ -65,6 +65,9 @@ public class TypeHandler {
         // 图片
         adapters.add(new ImageAdapter());
 
+        // Internet
+        adapters.add(new IpV4Adapter());
+        adapters.add(new IpV6Adapter());
         // MISC 通用辅助生成
         adapters.add(new PickAdapter());
     }
@@ -105,6 +108,53 @@ public class TypeHandler {
             return result.toString();
         }
         // 如果不是@开头的,则算字符串处理
+        return value;
+    }
+
+    /**
+     * 处理bool类型的数据
+     *
+     * @param key   key
+     * @param value value
+     * @return bool
+     */
+    public Object bool(String key, Object value) {
+        ParseResult rules = Parser.parseKey(key);
+        if (rules.getRange().size() > 0) {
+            for (StringTypeAdapter stringTypeAdapter : adapters) {
+                if (stringTypeAdapter.supports(StringTypes.bool)) {
+                    return stringTypeAdapter.random(rules, key, value);
+                }
+            }
+        }
+        return value;
+    }
+
+    /**
+     * 处理数值类型的数据
+     *
+     * @param key   key
+     * @param value value
+     * @return number
+     */
+    public Object number(String key, Object value) {
+        ParseResult rules = Parser.parseKey(key);
+        // 判断是否是小数
+        if (rules.getDecimal().size() > 0) {
+            for (StringTypeAdapter stringTypeAdapter : adapters) {
+                if (stringTypeAdapter.supports(StringTypes.decimal)) {
+                    return stringTypeAdapter.random(rules, key, value);
+                }
+            }
+        }
+        // 判断是否是整数
+        if (rules.getRange().size() > 0) {
+            for (StringTypeAdapter stringTypeAdapter : adapters) {
+                if (stringTypeAdapter.supports(StringTypes.number)) {
+                    return stringTypeAdapter.random(rules, key, value);
+                }
+            }
+        }
         return value;
     }
 }

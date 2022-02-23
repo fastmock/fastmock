@@ -19,6 +19,6 @@ public class TitleAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
-        return RandomText.title(rules.getMin(), rules.getMax());
+        return RandomText.title(rules.getCount());
     }
 }

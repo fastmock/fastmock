@@ -31,6 +31,10 @@ public enum StringTypes {
 
     // misc
     pick,
+    // internet
+    ip, ipv4, ipv6,
+    // user-agent
+    ua, userAgent,
 
     none;
 

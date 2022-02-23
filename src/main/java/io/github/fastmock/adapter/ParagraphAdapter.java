@@ -19,6 +19,6 @@ public class ParagraphAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
-        return RandomText.paragraph(rules.getMin(), rules.getMax());
+        return RandomText.paragraph(rules.getCount());
     }
 }

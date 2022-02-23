@@ -1,0 +1,8 @@
+{
+  "name": "@cname",
+  "age|1-100": 3,
+  "bio|3": "@cword",
+  "remark|4": "@word",
+  "locked": "@bool",
+  "disabled|1": true
+}

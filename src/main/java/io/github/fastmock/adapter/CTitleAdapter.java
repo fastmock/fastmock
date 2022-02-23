@@ -20,6 +20,6 @@ public class CTitleAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
-        return RandomText.ctitle(rules.getMin(), rules.getMax());
+        return RandomText.ctitle(rules.getCount());
     }
 }

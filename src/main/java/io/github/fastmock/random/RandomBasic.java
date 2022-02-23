@@ -31,15 +31,20 @@ public class RandomBasic {
     }
 
     // 返回一个随机的浮点数。
-    public static float nextFloat(int min, int max, int dmin, int dmax) {
+    public static BigDecimal nextFloat(int min, int max, int dmin, int dmax) {
         if (dmax == 0) {
             dmax = dmin;
         }
+
+        int value = nextInt(min, max);
         // 保留的小数位数
         int decimal = nextInt(dmin, dmax);
-        double value = RANDOM.nextFloat() * (max - min) + min;
-        BigDecimal result = new BigDecimal(value).setScale(decimal, BigDecimal.ROUND_HALF_DOWN);
-        return result.floatValue();
+        StringBuilder builder = new StringBuilder();
+        builder.append(value).append(".");
+        for (int i = 0; i < decimal; i++) {
+            builder.append(nextInt(0, 9));
+        }
+        return new BigDecimal(builder.toString());
     }
 
 

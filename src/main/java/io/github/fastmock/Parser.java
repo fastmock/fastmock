@@ -1,10 +1,11 @@
 package io.github.fastmock;
 
+import io.github.fastmock.utils.NumberUtils;
+import io.github.fastmock.utils.RandomUtils;
 import io.github.fastmock.utils.StringUtils;
-import org.apache.commons.lang3.RandomUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -27,17 +28,61 @@ public class Parser {
      */
     public static ParseResult parseKey(String key) {
         ParseResult parseResult = new ParseResult();
-        String[] ranges = parseRanges(key);
-        // 解析整数部分
-        if (!StringUtils.isEmpty(ranges[3])) {
-            String[] range = parseRange(ranges[3]);
-            parseResult.setRange(range);
-            int min = !StringUtils.isEmpty(range[1]) ? Integer.parseInt(range[1]) : 0;
-            int max = !StringUtils.isEmpty(range[2]) ? Integer.parseInt(range[2]) : 0;
-            int count = StringUtils.isEmpty(range[2]) ? Integer.parseInt(range[1]) : RandomUtils.nextInt(min, max);
-            parseResult.setRangeMin(min);
-            parseResult.setRangeMax(max);
-            parseResult.setRangeCount(count);
+        Pattern pattern = Pattern.compile(Constants.RE_KEY);
+        Matcher matcher = pattern.matcher(key);
+        if (matcher.find()) {
+            MatchResult matchResult = matcher.toMatchResult();
+            // 解析整数部分
+            if (!StringUtils.isEmpty(matchResult.group(3))) {
+                List<String> range = parseRange(matchResult.group(3));
+                parseResult.setRange(range);
+                if (range.size() == 1) {
+                    int max = NumberUtils.parseInt(range.get(0));
+                    int count = RandomUtils.nextInt(max, max);
+                    parseResult.setMax(max);
+                    parseResult.setCount(count);
+                }
+                if (range.size() == 2) {
+                    int min = NumberUtils.parseInt(range.get(0));
+                    int max = NumberUtils.parseInt(range.get(1));
+                    if (min > max) {
+                        // 如果是参数写错了,则纠正
+                        int temp = min;
+                        min = max;
+                        max = temp;
+                    }
+                    int count = RandomUtils.nextInt(min, max);
+                    parseResult.setMin(min);
+                    parseResult.setMax(max);
+                    parseResult.setCount(count);
+                }
+            }
+            // 带有小数部分的情况
+            if (!StringUtils.isEmpty(matchResult.group(4))) {
+                List<String> decimal = parseRange(matchResult.group(4));
+                parseResult.setDecimal(decimal);
+
+                if (decimal.size() == 1) {
+                    int dmax = NumberUtils.parseInt(decimal.get(0));
+                    int dcount = RandomUtils.nextInt(dmax, dmax);
+                    parseResult.setDmax(dmax);
+                    parseResult.setDcount(dcount);
+                }
+                if (decimal.size() == 2) {
+                    int dmin = NumberUtils.parseInt(decimal.get(0));
+                    int dmax = NumberUtils.parseInt(decimal.get(1));
+                    int dcount = RandomUtils.nextInt(dmin, dmax);
+                    if (dmin > dmax) {
+                        // 如果是参数写错了,则纠正
+                        int temp = dmin;
+                        dmin = dmax;
+                        dmax = temp;
+                    }
+                    parseResult.setDmin(dmin);
+                    parseResult.setDmax(dmax);
+                    parseResult.setDcount(dcount);
+                }
+            }
         }
         return parseResult;
     }
@@ -75,53 +120,22 @@ public class Parser {
     }
 
     /**
-     * 解析json key参数
-     *
-     * @param key key
-     * @return parseParameters
-     */
-    private static String[] parseRanges(String key) {
-        Pattern pattern = Pattern.compile(Constants.RE_KEY);
-        Matcher matcher = pattern.matcher(key);
-        String[] result = new String[4];
-        if (matcher.find()) {
-            MatchResult matchResult = matcher.toMatchResult();
-            if (!StringUtils.isEmpty(matchResult.group(0))) {
-                result[0] = matchResult.group(0);
-            }
-            if (!StringUtils.isEmpty(matchResult.group(1))) {
-                result[1] = matchResult.group(1);
-            }
-            if (!StringUtils.isEmpty(matchResult.group(2))) {
-                result[2] = matchResult.group(2);
-            }
-            if (!StringUtils.isEmpty(matchResult.group(3))) {
-                result[3] = matchResult.group(3);
-            }
-        }
-        return result;
-    }
-
-    /**
      * 解析数值范围
      *
      * @param range range
      * @return parseRange
      */
-    private static String[] parseRange(String range) {
+    private static List<String> parseRange(String range) {
         Pattern pattern = Pattern.compile(Constants.RE_RANGE);
         Matcher matcher = pattern.matcher(range);
+        List<String> result = new LinkedList<>();
         if (matcher.find()) {
             MatchResult matchResult = matcher.toMatchResult();
-            String[] result = new String[3];
-            if (!StringUtils.isEmpty(matchResult.group(0))) {
-                result[0] = matchResult.group(0);
-            }
             if (!StringUtils.isEmpty(matchResult.group(1))) {
-                result[1] = matchResult.group(1);
+                result.add(matchResult.group(1));
             }
             if (!StringUtils.isEmpty(matchResult.group(2))) {
-                result[2] = matchResult.group(2);
+                result.add(matchResult.group(2));
             }
             return result;
         }

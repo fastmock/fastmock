@@ -16,7 +16,7 @@ FastMock是一个基于[fastjson](https://github.com/alibaba/fastjson)开发java
 <dependency>
     <groupId>io.github.fastmock</groupId>
     <artifactId>fastmock</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 对于gradle用户，将以下内容添加到您的build.gradle配置文件中。
@@ -78,11 +78,9 @@ pick
 
 TODO
 ----
-- 1 在字段key配置的xxx|1-10 表示字符串的长度或者数组的大小,对于其他字段则忽略参数 
-- 2 对于需要制定int范围大小,小数点位数,通过函数的参数指定。
-- 3 整形转换异常格式处理
-- 4 增加参数的合法验证,json格式的验证
-- 5 编写使用说明文档
+- 1 编写使用说明文档 
+- 2 value支持占位符,并保留占位符数据
+- 3 增加User-Agent的数据模拟
 
 LICENSE
 -------

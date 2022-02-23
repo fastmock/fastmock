@@ -20,6 +20,6 @@ public class CSentenceAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
-        return RandomText.csentence(rules.getMin(), rules.getMax());
+        return RandomText.csentence(rules.getCount());
     }
 }

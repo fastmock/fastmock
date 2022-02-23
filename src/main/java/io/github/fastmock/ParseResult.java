@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * author: wangkun32
  * date: 2021/12/28 14:17
@@ -14,23 +17,7 @@ public class ParseResult {
     @Getter
     // 1 name, 2 range
     // 1 min, 2 max
-    private String[] range;
-
-    // 都是数组最小个数
-    @Setter
-    @Getter
-    private int rangeMin = 0;
-
-    // 都是数组最大个数
-    @Setter
-    @Getter
-    private int rangeMax = 0;
-
-    @Setter
-    @Getter
-    // min-max
-    private int rangeCount = 0;
-
+    private List<String> range = new ArrayList<>();
     /**
      * 函数后面的参数列表 需要删除单引号或者双引号
      */
@@ -53,7 +40,7 @@ public class ParseResult {
 
     @Setter
     @Getter
-    private String[] decimal;
+    private List<String> decimal = new ArrayList<>();
 
     @Setter
     @Getter

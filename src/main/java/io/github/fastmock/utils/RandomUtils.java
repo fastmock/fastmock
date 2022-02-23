@@ -1,7 +1,5 @@
 package io.github.fastmock.utils;
 
-import org.apache.commons.lang3.Validate;
-
 import java.util.Random;
 
 /**

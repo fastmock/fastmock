@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * author: wangkun32
@@ -37,7 +40,7 @@ public class AppMockTest {
 
     @Test
     public void parseKey() {
-        String key = "topic_title|3-7";
+        String key = "topic_title|10-5.4-5";
         ParseResult result = Parser.parseKey(key);
         log.info("name: {}", MockUtils.parsedName(key));
         log.info("result: {}", result);

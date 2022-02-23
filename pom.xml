@@ -4,7 +4,7 @@
 
     <groupId>io.github.fastmock</groupId>
     <artifactId>fastmock</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.8</version>
     <packaging>jar</packaging>
 
     <name>fastmock</name>
@@ -55,24 +55,12 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.32</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-
         <!-- logback 依赖 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
         </dependency>
 
         <dependency>
@@ -201,7 +189,7 @@
                         <configuration>
                             <serverId>release</serverId>
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
 

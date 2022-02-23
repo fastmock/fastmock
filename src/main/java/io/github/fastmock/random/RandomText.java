@@ -23,15 +23,13 @@ public class RandomText {
     /**
      * 随机生成一段段落
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return paragraph
      */
-    public static String paragraph(int min, int max) {
-        int count = RandomUtils.nextInt(min, max);
+    public static String paragraph(int count) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= count; i++) {
-            builder.append(sentence(3, 7));
+            builder.append(sentence(count));
         }
         return builder.toString();
     }
@@ -39,15 +37,13 @@ public class RandomText {
     /**
      * 随机生成一个句子，第一个单词的首字母大写
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return sentence
      */
-    public static String sentence(int min, int max) {
-        int count = RandomUtils.nextInt(min, max);
+    public static String sentence(int count) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= count; i++) {
-            builder.append(word(3, 7));
+            builder.append(word(count));
         }
         return builder.toString();
     }
@@ -56,15 +52,13 @@ public class RandomText {
     /**
      * 随机生成一句标题，其中每个单词的首字母大写
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return title
      */
-    public static String title(int min, int max) {
-        int count = RandomUtils.nextInt(min, max);
+    public static String title(int count) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= count; i++) {
-            builder.append(word(3, 7));
+            builder.append(word(count));
         }
         return builder.toString();
     }
@@ -72,27 +66,23 @@ public class RandomText {
     /**
      * 随机生成一个文本
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return word
      */
-    public static String word(int min, int max) {
-        int count = RandomBasic.nextInt(min, max);
+    public static String word(int count) {
         return RandomStringUtils.randomAlphanumeric(count);
     }
 
     /**
      * 随机生成一段中文段落
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return chinese paragraph
      */
-    public static String cparagraph(int min, int max) {
-        int count = RandomUtils.nextInt(min, max);
+    public static String cparagraph(int count) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= count; i++) {
-            builder.append(csentence(12, 18));
+            builder.append(csentence(count));
         }
         return builder.toString();
     }
@@ -100,15 +90,13 @@ public class RandomText {
     /**
      * 随机生成一个中文句子
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return chinese sentence
      */
-    public static String csentence(int min, int max) {
-        int count = RandomUtils.nextInt(min, max);
+    public static String csentence(int count) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= count; i++) {
-            builder.append(cword(12, 18));
+            builder.append(cword(count));
         }
         return builder.toString();
     }
@@ -117,15 +105,13 @@ public class RandomText {
     /**
      * 随机生成一句中文标题
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return chinese title
      */
-    public static String ctitle(int min, int max) {
-        int count = RandomUtils.nextInt(min, max);
+    public static String ctitle(int count) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i <= count; i++) {
-            builder.append(cword(12, 18));
+            builder.append(cword(count));
         }
         return builder.toString();
     }
@@ -133,12 +119,10 @@ public class RandomText {
     /**
      * 随机生成一个文本
      *
-     * @param min min
-     * @param max max
+     * @param count count
      * @return chinese word
      */
-    public static String cword(int min, int max) {
-        int count = RandomBasic.nextInt(min, max);
+    public static String cword(int count) {
         return RandomStringUtils.random(count, dictHans);
     }
 }

@@ -21,7 +21,7 @@ public class AppTest {
 
     @Test
     public void anFloat() {
-        log.info("{}", RandomBasic.nextFloat(1, 1000, 2, 2));
+        log.info("{}", RandomBasic.nextFloat(1, 1000, 4, 4));
     }
 
     @Test

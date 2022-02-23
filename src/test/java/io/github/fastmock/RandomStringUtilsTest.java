@@ -23,6 +23,6 @@ public class RandomStringUtilsTest {
         log.info("randomAscii {}", RandomStringUtils.randomNumeric(5, 10));
         log.info("randomAscii {}", RandomStringUtils.randomPrint(100));
         log.info("randomAscii {}", RandomStringUtils.randomGraph(100));
-        log.info("randomAscii {}", RandomText.cword(2, 2));
+        log.info("randomAscii {}", RandomText.cword(2));
     }
 }

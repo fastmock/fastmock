@@ -1,6 +1,6 @@
 package io.github.fastmock.random;
 
-import org.apache.commons.lang3.RandomUtils;
+import io.github.fastmock.utils.RandomUtils;
 
 /**
  * author: wangkun32
