@@ -101,10 +101,9 @@ public class RandomAddress {
         if (len == 0) {
             len = 6;
         }
-        RandomBasic randomBasic = new RandomBasic();
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < len; i++) {
-            builder.append(randomBasic.nextNatural(0, 9));
+            builder.append(RandomBasic.nextNatural(0, 9));
         }
         return builder.toString();
     }

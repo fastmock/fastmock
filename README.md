@@ -16,14 +16,14 @@ FastMock是一个基于[fastjson](https://github.com/alibaba/fastjson)开发java
 <dependency>
     <groupId>io.github.fastmock</groupId>
     <artifactId>fastmock</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 </dependency>
 ```
 对于gradle用户，将以下内容添加到您的build.gradle配置文件中。
 
 ```groovy
 dependencies {
-    implementation 'io.github.fastmock:fastmock:1.0.4'
+    implementation 'io.github.fastmock:fastmock:1.0.8'
 }
 
 ```
@@ -74,6 +74,10 @@ color, hex, rgb, rgba, hls,
 image, dataimage,
 // 随机选择
 pick
+// IP Address
+ip, ipv4, ipv6,
+// user-agent
+ua, userAgent,
 ```
 
 TODO

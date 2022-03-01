@@ -3,6 +3,7 @@ package io.github.fastmock.adapter;
 import io.github.fastmock.ParseResult;
 import io.github.fastmock.StringTypeAdapter;
 import io.github.fastmock.StringTypes;
+import io.github.fastmock.random.RandomBasic;
 import io.github.fastmock.random.RandomText;
 
 /**
@@ -19,6 +20,11 @@ public class ParagraphAdapter implements StringTypeAdapter {
 
     @Override
     public Object random(ParseResult rules, String key, Object value) {
+        if (rules.getMin() == 0 && rules.getMax() == 0) {
+            rules.setMin(3);
+            rules.setMax(7);
+            rules.setCount(RandomBasic.nextInt(3, 7));
+        }
         return RandomText.paragraph(rules.getCount());
     }
 }

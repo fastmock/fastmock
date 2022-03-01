@@ -4,5 +4,8 @@
   "bio|3": "@cword",
   "remark|4": "@word",
   "locked": "@bool",
-  "disabled|1": true
+  "disabled|1": true,
+  "ctitle": "@ctitle",
+  "title": "@title",
+  "word": "@word"
 }
