@@ -1,0 +1,11 @@
+stages:
+  - test
+
+variables:
+  APP: fastcov-java-demo
+
+sonrque:
+  stage: test
+  image: plfmv1h0.mirror.aliyuncs.com/library/maven:3.6.3-jdk-11
+  script:
+    - mvn test jacoco:report sonar:sonar -Djava.version=11
