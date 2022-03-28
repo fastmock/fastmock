@@ -17,9 +17,6 @@ public class RandomService {
         this(SHARED_RANDOM);
     }
 
-    /**
-     * @param random If null is passed in, a default Random is assigned
-     */
     public RandomService(Random random) {
         this.random = random != null ? random : SHARED_RANDOM;
     }

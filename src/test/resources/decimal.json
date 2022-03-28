@@ -1,0 +1,8 @@
+{
+  "float1": 0.618,
+  "float2|1-20.2": 0,
+  "float3|1-100.2-5": 0,
+  "float4": "@float",
+  "float5": "@float(50)",
+  "float6": "@float(1,100,2,5)"
+}

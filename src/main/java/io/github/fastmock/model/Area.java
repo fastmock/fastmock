@@ -1,4 +1,4 @@
-package io.github.fastmock;
+package io.github.fastmock.model;
 
 import lombok.Getter;
 import lombok.Setter;

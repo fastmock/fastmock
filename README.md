@@ -16,14 +16,14 @@ FastMock是一个基于[fastjson](https://github.com/alibaba/fastjson)开发java
 <dependency>
     <groupId>io.github.fastmock</groupId>
     <artifactId>fastmock</artifactId>
-    <version>1.0.8</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 对于gradle用户，将以下内容添加到您的build.gradle配置文件中。
 
 ```groovy
 dependencies {
-    implementation 'io.github.fastmock:fastmock:1.0.8'
+    implementation 'io.github.fastmock:fastmock:2.0.1'
 }
 
 ```
@@ -85,6 +85,7 @@ TODO
 - 1 编写使用说明文档 
 - 2 value支持占位符,并保留占位符数据
 - 3 增加User-Agent的数据模拟
+- 4 增加以java api的方式生成mock数据
 
 LICENSE
 -------

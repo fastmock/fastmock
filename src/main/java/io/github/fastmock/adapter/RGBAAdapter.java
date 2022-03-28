@@ -18,7 +18,7 @@ public class RGBAAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         StringBuilder builder = new StringBuilder().append("rgba(")
                 .append(RandomBasic.nextInt(0, 255)).append(",")
                 .append(RandomBasic.nextInt(0, 255)).append(",")

@@ -9,10 +9,10 @@ import org.junit.Test;
  * date: 2021/12/27 14:20
  */
 @Slf4j
-public class ColorMockTest {
+public class ColorMockTest extends AbstractBaseTest {
+
     @Test
     public void color() {
-        Mock mock = new Mock();
         String data = "{\"color\":\"@color @name\"}";
         JSONObject jsonObject = mock.mock(data);
         log.info("{}", jsonObject.toString());
@@ -20,7 +20,6 @@ public class ColorMockTest {
 
     @Test
     public void hex() {
-        Mock mock = new Mock();
         String data = "{\"hex\":\"@hex\"}";
         JSONObject jsonObject = mock.mock(data);
         log.info("{}", jsonObject.toString());
@@ -28,7 +27,6 @@ public class ColorMockTest {
 
     @Test
     public void rgb() {
-        Mock mock = new Mock();
         String data = "{\"rgb\":\"@rgb\"}";
         JSONObject jsonObject = mock.mock(data);
         log.info("{}", jsonObject.toString());
@@ -36,7 +34,6 @@ public class ColorMockTest {
 
     @Test
     public void rgba() {
-        Mock mock = new Mock();
         String data = "{\"rgba\":\"@rgba\"}";
         JSONObject jsonObject = mock.mock(data);
         log.info("{}", jsonObject.toString());

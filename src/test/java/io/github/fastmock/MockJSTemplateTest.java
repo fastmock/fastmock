@@ -23,6 +23,10 @@ public class MockJSTemplateTest {
         JSONObject nextIntObject = mock.mock(nextInt);
         log.info("int {}", nextIntObject.toString());
 
+        String nextInt2 = "{\"int1|5\": 1}";
+        JSONObject nextIntObject2 = mock.mock(nextInt2);
+        log.info("int {}", nextIntObject2.toString());
+
         String nextInteger = "{\"integer\": \"@integer\"}";
         JSONObject nextIntegerObject = mock.mock(nextInteger);
         log.info("integer {}", nextIntegerObject.toString());

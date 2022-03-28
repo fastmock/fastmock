@@ -1,6 +1,7 @@
-package io.github.fastmock;
+package io.github.fastmock.model;
 
 import com.alibaba.fastjson.JSON;
+import io.github.fastmock.model.Area;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;

@@ -19,7 +19,7 @@ public class SentenceAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         if (rules.getMin() == 0 && rules.getMax() == 0) {
             rules.setMin(3);
             rules.setMax(7);

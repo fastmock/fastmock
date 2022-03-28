@@ -4,7 +4,6 @@ import io.github.fastmock.utils.NumberUtils;
 import io.github.fastmock.utils.RandomUtils;
 import io.github.fastmock.utils.StringUtils;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.MatchResult;
@@ -85,38 +84,6 @@ public class Parser {
             }
         }
         return parseResult;
-    }
-
-    /**
-     * 解析参数
-     * 2022-01-27 重新设计mock语法
-     *
-     * @param value value
-     * @return Schemas
-     */
-    public static List<Schema> parseValue(String value) {
-        final Pattern pattern = Pattern.compile(Constants.RE_PLACEHOLDER);
-        final Matcher matcher = pattern.matcher(value);
-        List<Schema> schemaList = new ArrayList<>();
-        while (matcher.find()) {
-            MatchResult matchResult = matcher.toMatchResult();
-            if (matchResult.group(2) != null) {
-//                String[] split = matchResult.group(2).split(",");
-//                List<String> parameters = new ArrayList<>(split.length);
-//                for (String str : split) {
-//                    str = str.replaceAll("'", "");
-//                    str = str.replaceAll("\"", "");
-//                    parameters.add(str);
-//                }
-                // 替换调单引号或者双引号
-                Schema schema = new Schema(matchResult.group(1), matchResult.group(2));
-                schemaList.add(schema);
-            } else {
-                Schema schema = new Schema(matchResult.group(1));
-                schemaList.add(schema);
-            }
-        }
-        return schemaList;
     }
 
     /**

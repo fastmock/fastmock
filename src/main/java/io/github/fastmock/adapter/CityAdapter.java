@@ -19,7 +19,7 @@ public class CityAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         RandomAddress randomAddress = new RandomAddress();
         return randomAddress.city(false);
     }

@@ -17,9 +17,8 @@ public interface StringTypeAdapter {
      * 处理结果
      *
      * @param rules rules
-     * @param key   key
      * @param value value
      * @return random
      */
-    Object random(ParseResult rules, String key, Object value);
+    Object random(ParseResult rules, Object value);
 }

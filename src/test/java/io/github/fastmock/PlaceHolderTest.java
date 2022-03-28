@@ -25,12 +25,4 @@ public class PlaceHolderTest {
         String res = object.replaceAll("\'", "").replaceAll("\"", "");
         log.info("Full match: {}", JSON.toJSONString(res.split(",")));
     }
-
-
-    @Test
-    public void email() {
-        final String value = "@user('test',1,2,3)@email";
-        List<Schema> schemas = Parser.parseValue(value);
-        log.info("Full match: {}", JSON.toJSONString(schemas));
-    }
 }

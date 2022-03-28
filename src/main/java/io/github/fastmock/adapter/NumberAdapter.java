@@ -6,6 +6,7 @@ import io.github.fastmock.StringTypes;
 import io.github.fastmock.random.RandomBasic;
 import io.github.fastmock.utils.NumberUtils;
 import io.github.fastmock.utils.RandomUtils;
+import io.github.fastmock.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,9 +27,12 @@ public class NumberAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
-        // TODO.. 合并参数
-        // List<String> parameters = Arrays.asList(rules.getParameters().split(","));
+    public Object random(ParseResult rules, Object value) {
+        // 如果parameters 有值,则忽略key里面设定的参数值
+        if (!StringUtils.isEmpty(rules.getParameters())) {
+            List<String> parameters = Arrays.asList(rules.getParameters().split(","));
+            rules.setRange(parameters);
+        }
         List<String> range = rules.getRange();
         if (range.size() == 1) {
             int max = NumberUtils.parseInt(rules.getRange().get(0));

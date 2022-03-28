@@ -26,7 +26,7 @@ public class ImageAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         // Random.image( size, background, foreground, text )
         ImageProps imageProps = new ImageProps();
 //        List<String> parameters = rules.getParameters();

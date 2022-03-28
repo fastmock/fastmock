@@ -26,7 +26,7 @@ public class PickAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         if (JsonUtils.isArray(rules.getParameters())) {
             JSONArray jsonArray = JSON.parseArray(rules.getParameters());
             int nextInt = RandomBasic.nextInt(0, jsonArray.size() - 1);

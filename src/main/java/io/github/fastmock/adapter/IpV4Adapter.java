@@ -20,7 +20,7 @@ public class IpV4Adapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         final int[] PRIVATE_FIRST_OCTET = {10, 127, 169, 192, 172};
 
         int first = RandomBasic.nextInt(0, 256);

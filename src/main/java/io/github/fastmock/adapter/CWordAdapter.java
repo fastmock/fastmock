@@ -20,7 +20,7 @@ public class CWordAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         if (rules.getMin() == 0 && rules.getMax() == 0) {
             rules.setMin(12);
             rules.setMax(18);

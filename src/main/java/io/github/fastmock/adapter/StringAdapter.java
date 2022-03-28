@@ -16,7 +16,7 @@ public class StringAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < rules.getCount(); i++) {
             builder.append(value);

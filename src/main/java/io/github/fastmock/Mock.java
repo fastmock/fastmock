@@ -1,14 +1,13 @@
 package io.github.fastmock;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import io.github.fastmock.random.RandomBasic;
-import io.github.fastmock.utils.MockUtils;
+import io.github.fastmock.service.MockValueService;
+import io.github.fastmock.service.RandomService;
 import io.github.fastmock.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  * author: wangkun32
@@ -16,112 +15,251 @@ import java.math.BigDecimal;
  */
 @Slf4j
 public class Mock {
-
-    private JSONObject mocked;
     private final TypeHandler typeHandler;
+    private final RandomService randomService;
+    private final MockValueService mockValueService;
+
 
     public Mock() {
-        this.mocked = new JSONObject();
-        this.typeHandler = new TypeHandler();
+        this.typeHandler = new TypeHandler(this);
+        this.randomService = new RandomService();
+        mockValueService = new MockValueService(randomService);
     }
 
+    /**
+     * 输入一个json格式模板文件,输出mock之后的json对象
+     *
+     * @param template json模板
+     * @return 输出mock之后的json对象
+     */
     public JSONObject mock(String template) {
         if (StringUtils.isEmpty(template)) {
             return null;
         }
         JSONObject jsonObject = JSON.parseObject(template, JSONObject.class);
-        // 最外层格式解析出来
-        mocked = parse(jsonObject);
-        return mocked;
-    }
-
-    private JSONObject parse(JSONObject jsonObject) {
-        JSONObject root = new JSONObject();
-        for (String key : jsonObject.keySet()) {
-            Object result = parse(root, key, jsonObject.get(key));
-            root.put(MockUtils.parsedName(key), result);
-        }
-        return root;
+        return typeHandler.resolve(jsonObject);
     }
 
     /**
-     * 递归处理对象的数据
+     * 注册自定义的实现
      *
-     * @param parent
-     * @param key
-     * @param obj
-     * @return
+     * @param adapter adapter
      */
-    private Object parse(JSONObject parent, String key, Object obj) {
-        // string
-        if (obj instanceof String) {
-            String value = (String) obj;
-            return this.typeHandler.string(key, value);
+    public void register(StringTypeAdapter adapter) {
+        if (adapter == null) {
+            throw new IllegalArgumentException("adapter can not null...");
         }
-        // 如果是基础数据类型 则原样输出
-        if (obj instanceof Integer
-                || obj instanceof Double
-                || obj instanceof Float
-                || obj instanceof BigDecimal) {
-            return this.typeHandler.number(key, obj);
-        }
-        if (obj instanceof Boolean) {
-            return this.typeHandler.bool(key, obj);
-        }
-        // object
-        if (obj instanceof JSONObject) {
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONObject result = new JSONObject();
-            for (String keySet : jsonObject.keySet()) {
-                Object target = parse(result, keySet, jsonObject.get(keySet));
-                result.put(MockUtils.parsedName(keySet), target);
-            }
-            return result;
-        }
-        // array
-        if (obj instanceof JSONArray) {
-            JSONArray jsonArray = (JSONArray) obj;
-            JSONArray result = new JSONArray();
-            ParseResult rules = Parser.parseKey(key);
+        mockValueService.register(adapter);
+    }
 
-            // 只有一个对象 需要mock的object对象数据
-            if (jsonArray.size() == 1) {
-                Object item = jsonArray.get(0);
-                // 数组很多用户习惯是不写这参数,默认应该有一条记录
-                if (rules.getRange().size() == 0) {
-                    rules.setCount(1);
-                }
-                for (int i = 1; i <= rules.getCount(); i++) {
-                    if (item instanceof JSONObject) {
-                        Object target = parse(parent, key, item);
-                        result.add(target);
-                    } else {
-                        // 处理普通类型
-                        String value = (String) item;
-                        Object target = this.typeHandler.string(StringTypes.string.name(), value);
-                        result.add(target);
-                    }
-                }
-            } else {
-                // 如果有多个字符串,则规则定义是随机选取数组中的随机几个
-                // 以下逻辑很关键,要根据设置的参数重新计算数组的长度,不能使用原始模板的的数组长度
-                // 处理随机选择,如果在数组只是普通数据类型,则在随机一次
-                if (rules.getRange().size() == 0) {
-                    for (Object item : jsonArray) {
-                        // 处理普通类型
-                        String value = (String) item;
-                        Object target = this.typeHandler.string("name", value);
-                        result.add(target);
-                    }
-                } else {
-                    for (int i = 1; i <= rules.getCount(); i++) {
-                        int nextInt = RandomBasic.nextInt(0, jsonArray.size() - 1);
-                        result.add(jsonArray.get(nextInt));
-                    }
-                }
-            }
-            return result;
-        }
-        return null;
+    public boolean nextBoolean() {
+        return randomService.nextBoolean();
+    }
+
+    public String cname() {
+        return mockValueService.resolve("@cname");
+    }
+
+    public String cFirstname() {
+        return mockValueService.resolve("@cfirstname");
+    }
+
+    public String cLastname() {
+        return mockValueService.resolve("@clastname");
+    }
+
+    public String color() {
+        return mockValueService.resolve("@color");
+    }
+
+    public String county() {
+        return mockValueService.resolve("@county");
+    }
+
+    public String cparagraph() {
+        return mockValueService.resolve("@cparagraph");
+    }
+
+    public String cparagraph(int min, int max) {
+        return mockValueService.resolve(String.format("@cparagraph(%s,%s)", min, max));
+    }
+
+    public String csentence() {
+        return mockValueService.resolve("@csentence");
+    }
+
+    public String csentence(int min, int max) {
+        return mockValueService.resolve(String.format("@csentence(%s,%s)", min, max));
+    }
+
+    public String ctitle() {
+        return mockValueService.resolve("@ctitle");
+    }
+
+    public String ctitle(int min, int max) {
+        return mockValueService.resolve(String.format("@ctitle(%s,%s)", min, max));
+    }
+
+    public String cword() {
+        return mockValueService.resolve("@cword");
+    }
+
+    public String cword(int min, int max) {
+        return mockValueService.resolve(String.format("@cword(%s,%s)", min, max));
+    }
+
+    public String date() {
+        return mockValueService.resolve("@date");
+    }
+
+    public String datetime() {
+        return mockValueService.resolve("@datetime");
+    }
+
+    public String decimal() {
+        return mockValueService.resolve("@decimal");
+    }
+
+    public String decimal(int min, int max, int dmin, int dmax) {
+        return mockValueService.resolve(String.format("@decimal(%s,%s,%s,%s)", min, max, dmin, dmax));
+    }
+
+    public String firstname() {
+        return mockValueService.resolve("@firstname");
+    }
+
+    public String guid() {
+        return mockValueService.resolve("@guid");
+    }
+
+    public String id() {
+        return mockValueService.resolve("@id");
+    }
+
+    public String image() {
+        return mockValueService.resolve("@image");
+    }
+
+    public String ipv4() {
+        return mockValueService.resolve("@ipv4");
+    }
+
+    public String ipv6() {
+        return mockValueService.resolve("@ipv6");
+    }
+
+    public String lastname() {
+        return mockValueService.resolve("@lastname");
+    }
+
+    public String name() {
+        return mockValueService.resolve("@name");
+    }
+
+    // TODO.. 指定时间格式化
+    public String now() {
+        return mockValueService.resolve("@now");
+    }
+
+    public String paragraph() {
+        return mockValueService.resolve("@paragraph");
+    }
+
+    public String paragraph(int min, int max) {
+        return mockValueService.resolve(String.format("@paragraph(%s,%s)", min, max));
+    }
+
+    public String pick(String... args) {
+        return mockValueService.resolve(String.format("@pick(%s)", JSON.toJSONString(Arrays.asList(args))));
+    }
+
+    public String pick(int... args) {
+        return mockValueService.resolve(String.format("@pick(%s)", JSON.toJSONString(Arrays.asList(args))));
+    }
+
+    public String province() {
+        return mockValueService.resolve("@province");
+    }
+
+    public String rgba() {
+        return mockValueService.resolve("@rgba");
+    }
+
+    public String sentence() {
+        return mockValueService.resolve("@sentence");
+    }
+
+    public String string() {
+        return mockValueService.resolve("@string");
+    }
+
+    public String string(int min, int max) {
+        return mockValueService.resolve(String.format("@string(%s,%s)", min, max));
+    }
+
+    public String time() {
+        return mockValueService.resolve("@time");
+    }
+
+    public String title() {
+        return mockValueService.resolve("@title");
+    }
+
+    public String title(int min, int max) {
+        return mockValueService.resolve(String.format("@title(%s,%s)", min, max));
+    }
+
+    public String uuid() {
+        return mockValueService.resolve("@uuid");
+    }
+
+    public String word() {
+        return mockValueService.resolve("@word");
+    }
+
+    public int nextInt() {
+        return randomService.nextInt(100);
+    }
+
+    public int nextInt(int max) {
+        return randomService.nextInt(max);
+    }
+
+    public int nextInt(int min, int max) {
+        return randomService.nextInt(min, max);
+    }
+
+    public double nextDouble() {
+        return randomService.nextDouble();
+    }
+
+    public long nextLong() {
+        return randomService.nextLong();
+    }
+
+    public long nextLong(int max) {
+        return randomService.nextLong(max);
+    }
+
+    public String hex() {
+        return mockValueService.resolve("@hex");
+    }
+
+    /**
+     * 随机生成服务
+     *
+     * @return RandomService
+     */
+    public RandomService random() {
+        return this.randomService;
+    }
+
+    /**
+     * 随机生成服务
+     *
+     * @return mockValueService
+     */
+    public MockValueService mockValueService() {
+        return this.mockValueService;
     }
 }

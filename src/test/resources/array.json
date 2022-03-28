@@ -1,0 +1,5 @@
+{
+  "array": ["@cname"],
+  "array2|5": ["@cname"],
+  "array3|1-5": ["@cname"]
+}

@@ -22,7 +22,7 @@ public class UuidAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         return UUID.randomUUID().toString();
     }
 }

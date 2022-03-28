@@ -22,7 +22,7 @@ public class IpV6Adapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 8; i++) {
             if (i > 0) {

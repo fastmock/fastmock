@@ -17,7 +17,7 @@ public class CNameAdapter implements StringTypeAdapter {
     }
 
     @Override
-    public Object random(ParseResult rules, String key, Object value) {
+    public Object random(ParseResult rules, Object value) {
         RandomName randomName = new RandomName();
         return randomName.cname();
     }
